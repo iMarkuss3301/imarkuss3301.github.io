@@ -1,12 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Inter:wght@300;400;500;600&display=swap');
 @import "tailwindcss";
 
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Baloo 2", ui-sans-serif, system-ui, sans-serif;
   
-  --color-brand-green: #dcfce7;
-  --color-brand-green-dark: #15803d;
+  --color-brand-green: #ecf8cf;
+  --color-brand-green-dark: #5f8f2f;
   --color-brand-black: #0a0a0a;
   --color-brand-white: #ffffff;
 }

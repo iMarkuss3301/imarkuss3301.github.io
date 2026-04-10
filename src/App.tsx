@@ -8,6 +8,8 @@ import peachLemongrassOrangeImage from './assets/drinks/peach-lemongrass-orange.
 import passionfruitImage from './assets/drinks/passionfruit.png';
 import limeJasmineImage from './assets/drinks/lime-jasmine.png';
 
+type Language = 'en' | 'pl' | 'vi';
+
 /** Real venue: Google Maps place + Wolt / social listings (verify hours by phone or Maps before visiting). */
 const STORE = {
   name: 'Little Saigon',
@@ -112,8 +114,122 @@ const REVIEWS = [
   }
 ];
 
+const UI_TEXT: Record<
+  Language,
+  {
+    languageLabel: string;
+    navHome: string;
+    navBestSellers: string;
+    navReviews: string;
+    navVisit: string;
+    locationBadge: string;
+    heroTitleLine1: string;
+    heroTitleLine2: string;
+    heroDescription: string;
+    ctaDirections: string;
+    ctaBestSellers: string;
+    bestSellersTitle: string;
+    bestSellersSubtitle: string;
+    reviewsTitle: string;
+    reviewsSubtitle: string;
+    visitTitle: string;
+    locationTitle: string;
+    openingHoursTitle: string;
+    contactTitle: string;
+    mapButton: string;
+    quickLinks: string;
+    followUs: string;
+    footerDescription: string;
+    footerRights: string;
+  }
+> = {
+  en: {
+    languageLabel: 'Language',
+    navHome: 'Home',
+    navBestSellers: 'Best Sellers',
+    navReviews: 'Reviews',
+    navVisit: 'Visit Us',
+    locationBadge: 'Warsaw · Mokotow',
+    heroTitleLine1: 'Authentic flavors,',
+    heroTitleLine2: 'right around the corner.',
+    heroDescription:
+      'Little Saigon - Tea, Coffee and Asian Market: specialty teas and coffees, Asian groceries, snacks, ingredients, and quick bites.',
+    ctaDirections: 'Get Directions',
+    ctaBestSellers: 'View Best Sellers',
+    bestSellersTitle: 'Our Best Sellers',
+    bestSellersSubtitle: 'Tropical Fruit Tea lineup added on March 16.',
+    reviewsTitle: 'What Our Customers Say',
+    reviewsSubtitle: "Don't just take our word for it.",
+    visitTitle: 'Come Visit Us',
+    locationTitle: 'Location',
+    openingHoursTitle: 'Opening Hours',
+    contactTitle: 'Contact',
+    mapButton: 'Open in Google Maps',
+    quickLinks: 'Quick Links',
+    followUs: 'Follow Us',
+    footerDescription: 'Little Saigon in Warsaw - teas, coffees, groceries, and flavors from across Asia.',
+    footerRights: 'All rights reserved.',
+  },
+  pl: {
+    languageLabel: 'Język',
+    navHome: 'Start',
+    navBestSellers: 'Bestsellery',
+    navReviews: 'Opinie',
+    navVisit: 'Odwiedź nas',
+    locationBadge: 'Warszawa · Mokotów',
+    heroTitleLine1: 'Autentyczne smaki,',
+    heroTitleLine2: 'tuż za rogiem.',
+    heroDescription:
+      'Little Saigon - Tea, Coffee & Asian Market: herbaty, kawy, azjatyckie produkty spożywcze, przekąski i szybkie przekąski.',
+    ctaDirections: 'Wskazówki dojazdu',
+    ctaBestSellers: 'Zobacz bestsellery',
+    bestSellersTitle: 'Nasze bestsellery',
+    bestSellersSubtitle: 'Linia Tropical Fruit Tea dodana 16 marca.',
+    reviewsTitle: 'Opinie klientów',
+    reviewsSubtitle: 'Sprawdź, co mówią nasi klienci.',
+    visitTitle: 'Odwiedź nas',
+    locationTitle: 'Lokalizacja',
+    openingHoursTitle: 'Godziny otwarcia',
+    contactTitle: 'Kontakt',
+    mapButton: 'Otwórz w Google Maps',
+    quickLinks: 'Szybkie linki',
+    followUs: 'Obserwuj nas',
+    footerDescription: 'Little Saigon w Warszawie - herbaty, kawy, produkty spożywcze i smaki z całej Azji.',
+    footerRights: 'Wszelkie prawa zastrzeżone.',
+  },
+  vi: {
+    languageLabel: 'Ngon ngu',
+    navHome: 'Trang chu',
+    navBestSellers: 'Ban chay',
+    navReviews: 'Danh gia',
+    navVisit: 'Ghe tham',
+    locationBadge: 'Cửa hàng thực phẩm châu Á',
+    heroTitleLine1: 'Huong vi chinh goc,',
+    heroTitleLine2: 'ngay gan ban.',
+    heroDescription:
+      'Little Saigon - Tea, Coffee & Asian Market: tra, ca phe, thuc pham chau A, do an vat va mon an nhanh.',
+    ctaDirections: 'Chi duong',
+    ctaBestSellers: 'Xem mon ban chay',
+    bestSellersTitle: 'Mon ban chay',
+    bestSellersSubtitle: 'Bo suu tap Tropical Fruit Tea them ngay 16 thang 3.',
+    reviewsTitle: 'Khach hang noi gi',
+    reviewsSubtitle: 'Hay xem danh gia tu khach hang.',
+    visitTitle: 'Ghe tham cua hang',
+    locationTitle: 'Dia chi',
+    openingHoursTitle: 'Gio mo cua',
+    contactTitle: 'Lien he',
+    mapButton: 'Mo Google Maps',
+    quickLinks: 'Lien ket nhanh',
+    followUs: 'Theo doi chung toi',
+    footerDescription: 'Little Saigon tai Warsaw - tra, ca phe, tap hoa va huong vi chau A.',
+    footerRights: 'Bao luu moi quyen.',
+  },
+};
+
 export default function App() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [language, setLanguage] = useState<Language>('en');
+  const t = UI_TEXT[language];
 
   return (
     <div className="min-h-screen bg-brand-white text-brand-black selection:bg-brand-green-dark selection:text-white">
@@ -123,14 +239,25 @@ export default function App() {
           <div className="flex justify-between items-center h-20">
             <div className="flex items-center gap-2">
               <img src={logoImage} alt={`${STORE.name} logo`} className="w-10 h-10 rounded-full object-cover border border-brand-green/50" />
-              <span className="font-display font-bold text-2xl tracking-tight">{STORE.name}</span>
+              <span className="font-display font-bold text-2xl tracking-tight text-brand-green-dark">{STORE.name}</span>
             </div>
             
             <div className="hidden md:flex items-center gap-8">
-              <a href="#home" className="text-sm font-medium hover:text-brand-green-dark transition-colors">Home</a>
-              <a href="#best-sellers" className="text-sm font-medium hover:text-brand-green-dark transition-colors">Best Sellers</a>
-              <a href="#reviews" className="text-sm font-medium hover:text-brand-green-dark transition-colors">Reviews</a>
-              <a href="#visit" className="text-sm font-medium hover:text-brand-green-dark transition-colors">Visit Us</a>
+              <a href="#home" className="text-sm font-medium hover:text-brand-green-dark transition-colors">{t.navHome}</a>
+              <a href="#best-sellers" className="text-sm font-medium hover:text-brand-green-dark transition-colors">{t.navBestSellers}</a>
+              <a href="#reviews" className="text-sm font-medium hover:text-brand-green-dark transition-colors">{t.navReviews}</a>
+              <a href="#visit" className="text-sm font-medium hover:text-brand-green-dark transition-colors">{t.navVisit}</a>
+              <label className="text-xs text-gray-500">{t.languageLabel}</label>
+              <select
+                value={language}
+                onChange={(e) => setLanguage(e.target.value as Language)}
+                className="text-sm border border-gray-300 rounded-full px-3 py-1 bg-white"
+                aria-label={t.languageLabel}
+              >
+                <option value="en">English</option>
+                <option value="pl">Polski</option>
+                <option value="vi">Tiếng Việt</option>
+              </select>
             </div>
 
             <button 
@@ -145,10 +272,23 @@ export default function App() {
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
           <div className="md:hidden bg-white border-b border-gray-100 px-4 py-4 space-y-4">
-            <a href="#home" className="block text-base font-medium" onClick={() => setIsMobileMenuOpen(false)}>Home</a>
-            <a href="#best-sellers" className="block text-base font-medium" onClick={() => setIsMobileMenuOpen(false)}>Best Sellers</a>
-            <a href="#reviews" className="block text-base font-medium" onClick={() => setIsMobileMenuOpen(false)}>Reviews</a>
-            <a href="#visit" className="block text-base font-medium" onClick={() => setIsMobileMenuOpen(false)}>Visit Us</a>
+            <a href="#home" className="block text-base font-medium" onClick={() => setIsMobileMenuOpen(false)}>{t.navHome}</a>
+            <a href="#best-sellers" className="block text-base font-medium" onClick={() => setIsMobileMenuOpen(false)}>{t.navBestSellers}</a>
+            <a href="#reviews" className="block text-base font-medium" onClick={() => setIsMobileMenuOpen(false)}>{t.navReviews}</a>
+            <a href="#visit" className="block text-base font-medium" onClick={() => setIsMobileMenuOpen(false)}>{t.navVisit}</a>
+            <div className="pt-2">
+              <label className="block text-xs text-gray-500 mb-1">{t.languageLabel}</label>
+              <select
+                value={language}
+                onChange={(e) => setLanguage(e.target.value as Language)}
+                className="w-full text-sm border border-gray-300 rounded-lg px-3 py-2 bg-white"
+                aria-label={t.languageLabel}
+              >
+                <option value="en">English</option>
+                <option value="pl">Polski</option>
+                <option value="vi">Tiếng Việt</option>
+              </select>
+            </div>
           </div>
         )}
       </nav>
@@ -176,21 +316,21 @@ export default function App() {
             >
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-green text-brand-green-dark text-sm font-medium mb-6">
                 <MapPin className="w-4 h-4" />
-                <span>{STORE.area}</span>
+                <span>{t.locationBadge}</span>
               </div>
-              <h1 className="text-5xl lg:text-7xl font-bold leading-[1.1] tracking-tight mb-6">
-                Authentic flavors,<br />right around the corner.
+              <h1 className="text-5xl lg:text-7xl font-bold leading-[1.1] tracking-tight mb-6 text-brand-green-dark">
+                {t.heroTitleLine1}<br />{t.heroTitleLine2}
               </h1>
               <p className="text-lg text-gray-600 mb-8 max-w-xl leading-relaxed">
-                {STORE.fullName}: specialty teas and coffees, Asian groceries, snacks, ingredients, and quick bites—right in Mokotów, Warsaw.
+                {t.heroDescription}
               </p>
               <div className="flex flex-wrap gap-4">
                 <a href="#visit" className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-brand-black text-white rounded-full font-medium hover:bg-gray-800 transition-colors">
-                  Get Directions
+                  {t.ctaDirections}
                   <ArrowRight className="w-4 h-4" />
                 </a>
                 <a href="#best-sellers" className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-brand-green text-brand-green-dark rounded-full font-medium hover:bg-[#cbf4d8] transition-colors">
-                  View Best Sellers
+                  {t.ctaBestSellers}
                 </a>
               </div>
             </motion.div>
@@ -202,8 +342,8 @@ export default function App() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-end mb-12">
               <div>
-                <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">Our Best Sellers</h2>
-                <p className="text-gray-600 max-w-2xl">Tropical Fruit Tea lineup added on March 16.</p>
+                <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">{t.bestSellersTitle}</h2>
+                <p className="text-gray-600 max-w-2xl">{t.bestSellersSubtitle}</p>
               </div>
             </div>
 
@@ -242,8 +382,8 @@ export default function App() {
         <section id="reviews" className="py-24 bg-brand-green/30">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">What Our Customers Say</h2>
-              <p className="text-gray-700">Don't just take our word for it.</p>
+              <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">{t.reviewsTitle}</h2>
+              <p className="text-gray-700">{t.reviewsSubtitle}</p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -279,7 +419,7 @@ export default function App() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
               >
-                <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-8">Come Visit Us</h2>
+                <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-8">{t.visitTitle}</h2>
                 
                 <div className="space-y-8">
                   <div className="flex gap-4">
@@ -287,7 +427,7 @@ export default function App() {
                       <MapPin className="w-6 h-6 text-brand-green-dark" />
                     </div>
                     <div>
-                      <h3 className="font-bold text-xl mb-2">Location</h3>
+                      <h3 className="font-bold text-xl mb-2">{t.locationTitle}</h3>
                       <p className="text-gray-600">
                         {STORE.addressLines.map((line) => (
                           <React.Fragment key={line}>
@@ -304,7 +444,7 @@ export default function App() {
                       <Clock className="w-6 h-6 text-brand-green-dark" />
                     </div>
                     <div>
-                      <h3 className="font-bold text-xl mb-2">Opening Hours</h3>
+                      <h3 className="font-bold text-xl mb-2">{t.openingHoursTitle}</h3>
                       <ul className="text-gray-600 space-y-1">
                         {STORE.hours.map((row) => (
                           <li key={row.label} className="flex justify-between gap-8 max-w-xs">
@@ -321,7 +461,7 @@ export default function App() {
                       <Phone className="w-6 h-6 text-brand-green-dark" />
                     </div>
                     <div>
-                      <h3 className="font-bold text-xl mb-2">Contact</h3>
+                      <h3 className="font-bold text-xl mb-2">{t.contactTitle}</h3>
                       <p className="text-gray-600">
                         <a href={`tel:${STORE.phoneTel}`} className="hover:text-brand-green-dark transition-colors">
                           {STORE.phoneDisplay}
@@ -357,7 +497,7 @@ export default function App() {
                   rel="noopener noreferrer"
                   className="absolute bottom-4 right-4 bg-white px-4 py-2 rounded-full text-sm font-medium text-brand-green-dark shadow-lg border border-gray-100 hover:bg-brand-green transition-colors"
                 >
-                  Open in Google Maps
+                  {t.mapButton}
                 </a>
               </motion.div>
             </div>
@@ -375,22 +515,22 @@ export default function App() {
                 <span className="font-display font-bold text-xl">{STORE.name}</span>
               </div>
               <p className="text-gray-400 max-w-sm">
-                {STORE.fullName} in Warsaw—teas, coffees, groceries, and flavors from across Asia.
+                {t.footerDescription}
               </p>
             </div>
             
             <div>
-              <h4 className="font-bold mb-4">Quick Links</h4>
+              <h4 className="font-bold mb-4">{t.quickLinks}</h4>
               <ul className="space-y-2 text-gray-400">
-                <li><a href="#home" className="hover:text-brand-green transition-colors">Home</a></li>
-                <li><a href="#best-sellers" className="hover:text-brand-green transition-colors">Best Sellers</a></li>
-                <li><a href="#reviews" className="hover:text-brand-green transition-colors">Reviews</a></li>
-                <li><a href="#visit" className="hover:text-brand-green transition-colors">Visit Us</a></li>
+                <li><a href="#home" className="hover:text-brand-green transition-colors">{t.navHome}</a></li>
+                <li><a href="#best-sellers" className="hover:text-brand-green transition-colors">{t.navBestSellers}</a></li>
+                <li><a href="#reviews" className="hover:text-brand-green transition-colors">{t.navReviews}</a></li>
+                <li><a href="#visit" className="hover:text-brand-green transition-colors">{t.navVisit}</a></li>
               </ul>
             </div>
 
             <div>
-              <h4 className="font-bold mb-4">Follow Us</h4>
+              <h4 className="font-bold mb-4">{t.followUs}</h4>
               <div className="flex gap-4">
                 <a
                   href={STORE.instagramUrl}
@@ -422,7 +562,7 @@ export default function App() {
           </div>
           
           <div className="pt-8 border-t border-gray-800 text-center text-gray-500 text-sm">
-            <p>&copy; {new Date().getFullYear()} Little Saigon Store. All rights reserved.</p>
+            <p>&copy; {new Date().getFullYear()} Little Saigon Store. {t.footerRights}</p>
           </div>
         </div>
       </footer>
