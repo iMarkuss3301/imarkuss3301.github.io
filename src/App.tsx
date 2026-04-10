@@ -349,7 +349,7 @@ export default function App() {
                 {t.heroDescription}
               </p>
               <div className="flex flex-wrap gap-4">
-                <a href="#visit" className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-brand-gold text-white rounded-full font-medium hover:brightness-95 transition-colors">
+                <a href="#visit" className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-brand-black text-white rounded-full font-medium hover:bg-gray-800 transition-colors">
                   {t.ctaDirections}
                   <ArrowRight className="w-4 h-4" />
                 </a>
@@ -530,7 +530,7 @@ export default function App() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-brand-gold text-white py-12 border-t border-[#a77b20]">
+      <footer className="bg-brand-black text-white py-12 border-t border-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
             <div className="col-span-1 md:col-span-2">
@@ -538,14 +538,14 @@ export default function App() {
                 <img src={logoImage} alt={`${STORE.name} logo`} className="w-8 h-8 rounded-full object-cover border border-brand-green/50" />
                 <span className="font-display font-bold text-xl">{STORE.name}</span>
               </div>
-              <p className="text-[#f6ebcf] max-w-sm">
+              <p className="text-gray-400 max-w-sm">
                 {t.footerDescription}
               </p>
             </div>
             
             <div>
               <h4 className="font-bold mb-4">{t.quickLinks}</h4>
-              <ul className="space-y-2 text-[#f6ebcf]">
+              <ul className="space-y-2 text-gray-400">
                 <li><a href="#home" className="hover:text-brand-green transition-colors">{t.navHome}</a></li>
                 <li><a href="#best-sellers" className="hover:text-brand-green transition-colors">{t.navBestSellers}</a></li>
                 <li><a href="#reviews" className="hover:text-brand-green transition-colors">{t.navReviews}</a></li>
@@ -560,7 +560,7 @@ export default function App() {
                   href={STORE.instagramUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-[#a77b20] flex items-center justify-center hover:bg-brand-green hover:text-brand-black transition-colors"
+                  className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-brand-green hover:text-brand-black transition-colors"
                   aria-label="Little Saigon on Instagram"
                 >
                   <Instagram className="w-5 h-5" />
@@ -569,14 +569,14 @@ export default function App() {
                   href={STORE.facebookUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-[#a77b20] flex items-center justify-center hover:bg-brand-green hover:text-brand-black transition-colors"
+                  className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-brand-green hover:text-brand-black transition-colors"
                   aria-label="Little Saigon on Facebook"
                 >
                   <Facebook className="w-5 h-5" />
                 </a>
                 <a
                   href={`tel:${STORE.phoneTel}`}
-                  className="w-10 h-10 rounded-full bg-[#a77b20] flex items-center justify-center hover:bg-brand-green hover:text-brand-black transition-colors"
+                  className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-brand-green hover:text-brand-black transition-colors"
                   aria-label={`Call ${STORE.phoneDisplay}`}
                 >
                   <Phone className="w-5 h-5" />
@@ -585,7 +585,7 @@ export default function App() {
             </div>
           </div>
           
-          <div className="pt-8 border-t border-[#a77b20] text-center text-[#f6ebcf] text-sm">
+          <div className="pt-8 border-t border-gray-800 text-center text-gray-500 text-sm">
             <p>&copy; {new Date().getFullYear()} Little Saigon Store. {t.footerRights}</p>
           </div>
         </div>
